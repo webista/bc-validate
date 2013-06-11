@@ -103,6 +103,23 @@
 					}
 				}
 
+				// Password match
+				if ( thisEl.data('bcvalidate').indexOf('password2') !== -1 ) {
+					errorOptions.msg = 'Password did not match';
+					var password1 = $('input[data-bcvalidate*="password1"]').val(),
+						password2 = $('input[data-bcvalidate*="password2"]').val();
+
+					if ( password1 !== password2 && e.keyCode !== 9 ) {
+						thisElState = true;
+						// Error view
+						new bcValidateHelpers().errDesign(errorOptions);
+						// Error message
+						new bcValidateHelpers().errMsg(errorOptions);
+					} else {
+						thisElState = false;
+					}
+				}
+
 				// Required
 				if ( thisEl.data('bcvalidate').indexOf('required') !== -1 ) {					
 					errorOptions.msg = 'This field is required';
@@ -114,22 +131,13 @@
 						// Error view
 						new bcValidateHelpers().errDesign(errorOptions);
 						// Error message
-						new bcValidateHelpers().errMsg(errorOptions);						
+						new bcValidateHelpers().errMsg(errorOptions);
 					} else {
 						// Remove errors
 						// Only if this el does not have an error from above validations
 						if ( thisElState === false ) {
 							new bcValidateHelpers().resetErrDesign(errorOptions);
 						}
-					}
-				}
-
-				// Password match
-				if ( thisEl.data('bcvalidate').indexOf('password2') !== -1 ) {
-					console.log($('input[data-bcvalidate="required|password1"]').val())
-
-					if ( $('input[type="password"]').data('bcvalidate').indexOf('password1') !== -1 ) {
-						console.log($(this).val());
 					}
 				}
 			}
