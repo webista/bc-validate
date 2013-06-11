@@ -26,3 +26,8 @@ data-bcvalidate="email|required"
 ex.
 <input type="text" data-bcvalidate="email|required">
 ```
+
+###Javascript
+```javascript
+$('yourFormUniqueIndentifier').bcValidate({errors: response.errors});
+```
