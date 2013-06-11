@@ -31,5 +31,8 @@ ex.
 
 ###Javascript
 ```javascript
-$('yourFormUniqueIndentifier').bcValidate({errors: response.errors});
+// Catches the errors from the backend
+if ( errorFlag === 'Y') {
+  $('yourFormUniqueIndentifier').bcValidate({errors: response.errors});
+}
 ```
