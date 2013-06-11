@@ -1,3 +1,3 @@
-Brainstalk Form Validation (bc-validate)
-===========
+#Bc-validate
 
+Javascript form validation for frontend and backend
