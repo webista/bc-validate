@@ -1,6 +1,8 @@
 #Bc-validate
 
 Javascript form validation for frontend and backend
+###NOTE:
+Be sure that your form field names are exactly the same as their corresponding fields in the backend.
 
 ##Instructions
 ###HTML
