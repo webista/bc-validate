@@ -1,3 +1,3 @@
-bc-validate
+Brainstalk Form Validation (bc-validate)
 ===========
-Brainstalk Form Validation
+
