@@ -23,7 +23,7 @@ data-bcvalidate="email"
 ex.
 <input type="text" data-bcvalidate="email">
 
-//for multiple validations, attibutes should be separated by a pipe | (required and email)
+//for multiple validations, attributes should be separated by a pipe | (required and email)
 data-bcvalidate="email|required" 
 ex.
 <input type="text" data-bcvalidate="email|required">
