@@ -37,6 +37,7 @@ ex.
 ```
 
 ###Javascript
+####Form submit
 ```javascript
 // Validate options
 var validateOptions = {
