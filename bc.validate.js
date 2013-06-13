@@ -146,14 +146,18 @@
 		// When form is submit
 		// $('yourForm').bcValidate({errors: response.errors});
 		if ( options ) {
-			$.each(options.errors, function(fieldName,object) {
-				var errorFields = '';
+			$.each(options.errors.backend, function(fieldName,object) {
+				var errorFields = '',
+					thisEl = $(rootThis);
 
 				if ( fieldName === 'dateOfBirth' ) {
-					errorFields = $(rootThis).find('input[name="dobDay"], input[name="dobYear"]');
+					errorFields = thisEl.find('input[name="dobDay"], input[name="dobYear"]');
 					$('select[name="dobMon"]').css({'margin-bottom': 0});
+				} else if ( fieldName === 'targetDate' ) {
+					errorFields = thisEl.find('input[name="targetDay"], input[name="targetYear"]');
+					$('select[name="targetMon"]').css({'margin-bottom': 0});
 				} else {
-					errorFields = $(rootThis).find('input[name="'+ fieldName +'"]');
+					errorFields = thisEl.find('input[name="'+ fieldName +'"]');
 				}
 
 				var errorOptions = {
@@ -166,6 +170,10 @@
 				// Error message
 				new bcValidateHelpers().errMsg(errorOptions);
 			});
+
+			if ( options.errors.customFieldNames ) {
+				console.log(options.errors.customFieldNames)
+			}
 		}
 	}
 
