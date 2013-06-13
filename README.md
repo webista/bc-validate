@@ -38,8 +38,17 @@ ex.
 
 ###Javascript
 ```javascript
-// Catches the errors from the backend
+// Validate options
+var validateOptions = {
+      errors: {
+        // Catches the errors from the backend
+        backend: {}
+      }
+};
+
+validateOptions.errors.backend = response.errors;
+
 if ( errorFlag === 'Y') {
-  $('yourFormUniqueIndentifier').bcValidate({errors: response.errors});
+  $('yourFormUniqueIndentifier').bcValidate(validateOptions);
 }
 ```
