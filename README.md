@@ -56,6 +56,7 @@ if ( errorFlag === 'Y' ) {
 // Custom error fields:
 // By default, error messages are appended below the input field, but what if you want the error to appear somewhere after 
 // the input's parent element container? That's simple.
+
 #HTML
 // Be sure that the parent element's container CLASS is the same as the name of the input inside the container but with a
 // wrap word succeeded by a dash character (ex. wrap-inputname)
@@ -67,5 +68,6 @@ if ( errorFlag === 'Y' ) {
     </span>
     <span class="fileupload-preview"></span>
 </div>
+
 #Javascript
 ```
