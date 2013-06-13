@@ -44,11 +44,13 @@
 
 	// Error message
 	bcValidateHelpers.prototype.errMsg = function(options) {
-		if ( options.thisEl.next('.bc-validate-error-list').length === 0 ) {
-			options.thisEl.after('<ul class="bc-validate-error-list">\
+		if ( options.thisEl.next('.bc-validate-error-list').length !== 0 ) {
+			options.thisEl.next('.bc-validate-error-list').remove()
+		}
+
+		options.thisEl.after('<ul class="bc-validate-error-list">\
 				<li>'+ options.msg +'</li>\
 			</ul>');
-		}
 	}
 
 	bcValidateHelpers.prototype.errDesign = function(options) {
@@ -120,6 +122,46 @@
 					}
 				}
 
+				// Numeric
+				if ( thisEl.data('bcvalidate').indexOf('number') !== -1 ) {
+					var numeric = !isNaN(parseFloat(thisElVal)) && isFinite(thisElVal);
+
+					if ( numeric === false ) {
+						thisElState = true;
+						
+						// Error message
+						errorOptions.msg = 'This field should be numeric';
+						new bcValidateHelpers().errMsg(errorOptions);
+					} else {
+						thisElState = false;
+					}
+				}
+
+				// Range by digits
+				if ( thisEl.data('bcvalidate').indexOf('rangebydigit') !== -1 ) {
+					var numeric = !isNaN(parseFloat(thisElVal)) && isFinite(thisElVal);
+
+					if ( numeric === false ) {
+						thisElState = true;
+						
+						// Error message
+						errorOptions.msg = 'This field should be numeric';
+						new bcValidateHelpers().errMsg(errorOptions);
+					} else {					
+						var range = thisEl.data('bcvalidate').split('rangebydigit')[1],
+							regExp = new RegExp('^[0-9]{' + range + '}$', 'i');
+
+						if ( regExp.test(thisElVal ) === true ) {
+							thisElState = false;
+						} else {
+							thisElState = true;
+							errorOptions.msg = 'This field should be '+ range +' digits';
+							new bcValidateHelpers().errDesign(errorOptions);
+							new bcValidateHelpers().errMsg(errorOptions);
+						}
+					}
+				}
+
 				// Required
 				if ( thisEl.data('bcvalidate').indexOf('required') !== -1 ) {					
 					errorOptions.msg = 'This field is required';
@@ -152,13 +194,16 @@
 			} else {
 				// Custom field errors
 				$.each(options.errors.customFieldNames, function(k,v) {
-					var errorOptions = {
-						thisEl: $('.wrap-'+v),
-						msg: options.errors.backend[v][0][1]
-					};
-					
-					// Error message
-					new bcValidateHelpers().errMsg(errorOptions);
+					// If defined custom error fields has a corresponding error in the backend
+					if ( v in options.errors.backend === true ) {
+						var errorOptions = {
+							thisEl: $('.wrap-'+v),
+							msg: options.errors.backend[v][0][1]
+						};
+						
+						// Error message
+						new bcValidateHelpers().errMsg(errorOptions);
+					}
 				});
 			}
 
@@ -182,8 +227,6 @@
 							thisEl: ( errorFields.length > 1) ? $(errorFields[1]) : errorFields,
 							msg: object[0][1]
 						};
-
-					console.log(errorOptions);
 
 					// Error view
 					new bcValidateHelpers().errDesign(errorOptions);
