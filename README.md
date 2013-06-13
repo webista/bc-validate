@@ -49,7 +49,7 @@ var validateOptions = {
 
 validateOptions.errors.backend = response.errors;
 
-if ( errorFlag === 'Y') {
+if ( errorFlag === 'Y' ) {
   $('yourFormUniqueIndentifier').bcValidate(validateOptions);
 }
 ```
