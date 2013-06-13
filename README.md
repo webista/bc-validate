@@ -23,10 +23,15 @@ data-bcvalidate="email"
 ex.
 <input type="text" data-bcvalidate="email">
 
-// For multiple validations, attributes should be separated by a pipe | (required and email)
-data-bcvalidate="email|required" 
+// For numeric field
+data-bcvalidate="number"
 ex.
-<input type="text" data-bcvalidate="email|required">
+<input type="text" data-bcvalidate="number">
+
+// For multiple validations, attributes should be separated by a pipe |
+data-bcvalidate="email|required|number" 
+ex.
+<input type="text" data-bcvalidate="email|required|number">
 
 // For password matching, create 2 password fields with password1 and password2 attributes
 data-bcvalidate="password1" // first password 
