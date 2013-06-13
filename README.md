@@ -52,4 +52,20 @@ validateOptions.errors.backend = response.errors;
 if ( errorFlag === 'Y' ) {
   $('yourFormUniqueIndentifier').bcValidate(validateOptions);
 }
+
+// Custom error fields:
+// By default, error messages are appended below the input field, but what if you want the error to appear somewhere after 
+// the input's parent element container? That's simple.
+#HTML
+// Be sure that the parent element's container CLASS is the same as the name of the input inside the container but with a
+// wrap word succeeded by a dash character (ex. wrap-inputname)
+<div class="wrap-stdLogo"> // in this case stdLogo
+    <span class="btn-file button">
+        <span class="fileupload-new">Upload</span>
+        <span class="fileupload-exists">Change</span>
+        <input type="file" id="standard-logo-btn" name="stdLogo"> // input name is stdLogo
+    </span>
+    <span class="fileupload-preview"></span>
+</div>
+#Javascript
 ```
