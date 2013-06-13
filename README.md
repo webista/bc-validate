@@ -57,7 +57,7 @@ if ( errorFlag === 'Y' ) {
 // By default, error messages are appended below the input field, but what if you want the error to appear somewhere after 
 // the input's parent element container? That's simple.
 
-#HTML
+// -- HTML
 // Be sure that the parent element's container CLASS is the same as the name of the input inside the container but with a
 // wrap word succeeded by a dash character (ex. wrap-inputname)
 <div class="wrap-stdLogo"> // in this case stdLogo
@@ -69,5 +69,18 @@ if ( errorFlag === 'Y' ) {
     <span class="fileupload-preview"></span>
 </div>
 
-#Javascript
+// -- Javascript
+// Just add a customField key witn a value of empty array in the validation error object
+validateOptions = {
+    errors: {
+        backend: {},
+        customFieldNames: []
+    }
+};
+
+validateOptions.errors.backend = response.errors;
+// Multiple custom field error
+validateOptions.errors.customFieldNames = ['stdLogo', 'sqrLogo'];
+
+$('yourFormUniqueIndentifier').bcValidate(validateOptions);
 ```
