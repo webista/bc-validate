@@ -146,34 +146,51 @@
 		// When form is submit
 		// $('yourForm').bcValidate({errors: response.errors});
 		if ( options ) {
+			if ( !options.errors.customFieldNames ) {
+				// Prevent the custom field key from gettting undefined
+				options.errors.customFieldNames === null;
+			} else {
+				// Custom field errors
+				$.each(options.errors.customFieldNames, function(k,v) {
+					var errorOptions = {
+						thisEl: $('.wrap-'+v),
+						msg: options.errors.backend[v][0][1]
+					};
+					
+					// Error message
+					new bcValidateHelpers().errMsg(errorOptions);
+				});
+			}
+
 			$.each(options.errors.backend, function(fieldName,object) {
 				var errorFields = '',
 					thisEl = $(rootThis);
 
-				if ( fieldName === 'dateOfBirth' ) {
-					errorFields = thisEl.find('input[name="dobDay"], input[name="dobYear"]');
-					$('select[name="dobMon"]').css({'margin-bottom': 0});
-				} else if ( fieldName === 'targetDate' ) {
-					errorFields = thisEl.find('input[name="targetDay"], input[name="targetYear"]');
-					$('select[name="targetMon"]').css({'margin-bottom': 0});
-				} else {
-					errorFields = thisEl.find('input[name="'+ fieldName +'"]');
+				// Generic errors only without custom fields
+				if ( $.inArray(fieldName, options.errors.customFieldNames) === -1) {
+					if ( fieldName === 'dateOfBirth' ) {
+						errorFields = thisEl.find('input[name="dobDay"], input[name="dobYear"]');
+						$('select[name="dobMon"]').css({'margin-bottom': 0});
+					} else if ( fieldName === 'targetDate' ) {
+						errorFields = thisEl.find('input[name="targetDay"], input[name="targetYear"]');
+						$('select[name="targetMon"]').css({'margin-bottom': 0});
+					} else {
+						errorFields = thisEl.find('input[name="'+ fieldName +'"]');
+					}
+
+					var errorOptions = {
+							thisEl: ( errorFields.length > 1) ? $(errorFields[1]) : errorFields,
+							msg: object[0][1]
+						};
+
+					console.log(errorOptions);
+
+					// Error view
+					new bcValidateHelpers().errDesign(errorOptions);
+					// Error message
+					new bcValidateHelpers().errMsg(errorOptions);
 				}
-
-				var errorOptions = {
-						thisEl: ( errorFields.length > 1) ? $(errorFields[1]) : errorFields,
-						msg: object[0][1]
-					};
-
-				// Error view
-				new bcValidateHelpers().errDesign(errorOptions);
-				// Error message
-				new bcValidateHelpers().errMsg(errorOptions);
 			});
-
-			if ( options.errors.customFieldNames ) {
-				console.log(options.errors.customFieldNames)
-			}
 		}
 	}
 
