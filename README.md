@@ -44,6 +44,15 @@ data-bcvalidate="password2" // second password
 ex.
 <input type="password" data-bcvalidate="password1">
 <input type="password" data-bcvalidate="password2">
+
+// For creating custom styles
+data-customstyle="class{zipcode-label-error}|newElId{signup-org-zip-label}"
+      // You have to add a new class like this
+      class{zipcode-label-error}
+      // and if you want the error to append to a new element
+      // define a new Id or Class
+      newElId{signup-org-zip-label} // for id
+      newElClass{signup-org-zip-label} // for class
 ```
 
 ###Javascript
