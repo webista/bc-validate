@@ -58,7 +58,7 @@ data-customstyle="class{zipcode-label-error}|newElId{signup-org-zip-label}"
 ###Javascript
 ####Form submit
 ```javascript
-// Validate options
+// Validate options:
 var validateOptions = {
       errors: {
         // Catches the errors from the backend
@@ -104,4 +104,24 @@ validateOptions.errors.backend = response.errors;
 validateOptions.errors.customFieldNames = ['stdLogo', 'sqrLogo'];
 
 $('yourFormUniqueIndentifier').bcValidate(validateOptions);
+
+// Custom field style
+// Add customFieldStyle in validateOptions object
+
+validateOptions = {
+    errors: {
+        backend: {},
+        customFieldNames: [],
+        customFieldStyle: {} // <---- this one
+    }
+}
+
+// Then assign a style in a field name
+// In the example, "addressZip" is the field name and the "zipcode-label-error" is the style
+validateOptions.errors.customFieldStyle.addressZip = 'zipcode-label-error';
+
+// If you want the defined style to append to a new element do this
+// Notice that i just created a NewEl right after the field name that I created above "addressZipNewEl"
+// then assign a class or an id in this case "#signup-org-zip-label"
+validateOptions.errors.customFieldStyle.addressZipNewEl = '#signup-org-zip-label';
 ```
